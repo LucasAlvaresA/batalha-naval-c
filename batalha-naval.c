@@ -5,12 +5,11 @@
 
 int main() {
 
-    // =========================
-    // Declaração do tabuleiro 10x10
-    // =========================
     int tabuleiro[TAM][TAM];
 
-    // Inicializa todo o tabuleiro com 0 (água)
+    // =========================
+    // Inicializa tabuleiro com água (0)
+    // =========================
     for (int i = 0; i < TAM; i++) {
         for (int j = 0; j < TAM; j++) {
             tabuleiro[i][j] = 0;
@@ -18,37 +17,58 @@ int main() {
     }
 
     // =========================
-    // Vetores que representam os navios
+    // Navios (vetores)
     // =========================
-    int navioHorizontal[TAM_NAVIO] = {3, 3, 3};
-    int navioVertical[TAM_NAVIO] = {3, 3, 3};
+    int navio[TAM_NAVIO] = {3, 3, 3};
 
     // =========================
-    // Coordenadas iniciais escolhidas
+    // NAVIO 1 — Horizontal
     // =========================
-    int linhaH = 2, colunaH = 4; // Navio horizontal
-    int linhaV = 6, colunaV = 1; // Navio vertical
+    int lH = 1, cH = 2;
 
-    // =========================
-    // Validação e posicionamento do navio horizontal
-    // =========================
-    if (colunaH + TAM_NAVIO <= TAM) {
+    if (cH + TAM_NAVIO <= TAM) {
         for (int i = 0; i < TAM_NAVIO; i++) {
-            // Verifica sobreposição
-            if (tabuleiro[linhaH][colunaH + i] == 0) {
-                tabuleiro[linhaH][colunaH + i] = navioHorizontal[i];
+            if (tabuleiro[lH][cH + i] == 0) {
+                tabuleiro[lH][cH + i] = navio[i];
             }
         }
     }
 
     // =========================
-    // Validação e posicionamento do navio vertical
+    // NAVIO 2 — Vertical
     // =========================
-    if (linhaV + TAM_NAVIO <= TAM) {
+    int lV = 5, cV = 8;
+
+    if (lV + TAM_NAVIO <= TAM) {
         for (int i = 0; i < TAM_NAVIO; i++) {
-            // Verifica sobreposição
-            if (tabuleiro[linhaV + i][colunaV] == 0) {
-                tabuleiro[linhaV + i][colunaV] = navioVertical[i];
+            if (tabuleiro[lV + i][cV] == 0) {
+                tabuleiro[lV + i][cV] = navio[i];
+            }
+        }
+    }
+
+    // =========================
+    // NAVIO 3 — Diagonal principal (↘)
+    // =========================
+    int lD1 = 2, cD1 = 5;
+
+    if (lD1 + TAM_NAVIO <= TAM && cD1 + TAM_NAVIO <= TAM) {
+        for (int i = 0; i < TAM_NAVIO; i++) {
+            if (tabuleiro[lD1 + i][cD1 + i] == 0) {
+                tabuleiro[lD1 + i][cD1 + i] = navio[i];
+            }
+        }
+    }
+
+    // =========================
+    // NAVIO 4 — Diagonal secundária (↙)
+    // =========================
+    int lD2 = 6, cD2 = 6;
+
+    if (lD2 + TAM_NAVIO <= TAM && cD2 - (TAM_NAVIO - 1) >= 0) {
+        for (int i = 0; i < TAM_NAVIO; i++) {
+            if (tabuleiro[lD2 + i][cD2 - i] == 0) {
+                tabuleiro[lD2 + i][cD2 - i] = navio[i];
             }
         }
     }
